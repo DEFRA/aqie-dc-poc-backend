@@ -1,5 +1,5 @@
 import Boom from '@hapi/boom'
-import { findAllExampleData, findExampleData } from '#/services/ExampleFind.js'
+import { findAllExampleData, findExampleData } from '#src/services/ExampleFind.js'
 
 export const example = [
   {

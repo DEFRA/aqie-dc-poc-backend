@@ -8,8 +8,8 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "AWS_EMF_ENVIRONMENT=Local NODE_ENV=development npm run server:watch",
-    "dev:debug": "AWS_EMF_ENVIRONMENT=Local NODE_ENV=development npm run server:debug",
+    "dev": "cross-env AWS_EMF_ENVIRONMENT=Local cross-env NODE_ENV=development npm run server:watch",
+    "dev:debug": "cross-env AWS_EMF_ENVIRONMENT=Local cross-env NODE_ENV=development npm run server:debug",
     "docker:dev": "npm run dev",
     "format": "prettier --write \"**/*.{cjs,js,json,md}\"",
     "format:check": "prettier --check \"**/*.{cjs,js,json,md}\"",
@@ -20,12 +20,12 @@
     "server:debug": "node --watch --inspect-brk=0.0.0.0 --env-file-if-exists=.env ./src",
     "server:watch": "node --watch --inspect=0.0.0.0 --env-file-if-exists=.env ./src",
     "setup:husky": "node -e \"try { (await import('husky')).default() } catch (e) { if (e.code !== 'ERR_MODULE_NOT_FOUND') throw e }\" --input-type module",
-    "start": "NODE_ENV=production node . --env-file-if-exists=.env",
+    "start": "cross-env NODE_ENV=production node . --env-file-if-exists=.env",
     "test": "TZ=UTC vitest run --coverage",
     "test:watch": "TZ=UTC vitest"
   },
   "imports": {
-    "#/*": "./src/*"
+    "#src/*": "./src/*"
   },
   "author": "Defra DDTS",
   "license": "OGL-UK-3.0",
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "4.1.4",
+    "cross-env": "7.0.3",
     "eslint": "9.39.2",
     "husky": "9.1.7",
     "neostandard": "0.13.0",
