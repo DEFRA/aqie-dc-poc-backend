@@ -6,6 +6,7 @@ import {
   searchLocation,
   LocationBackendError
 } from '#src/services/LocationService.js'
+import { mapLocationResponse } from '#src/services/location-mapper.js'
 
 const MIN_QUERY_LENGTH = 2
 const MAX_QUERY_LENGTH = 100
@@ -34,7 +35,7 @@ export const locations = [
 
       try {
         const data = await searchLocation(q, { traceId })
-        return h.response(data).code(200)
+        return h.response(mapLocationResponse(q,data)).code(200)
       } catch (err) {
         if (err instanceof LocationBackendError) {
           request.logger.error(
